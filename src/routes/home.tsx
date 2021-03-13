@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
@@ -42,6 +42,14 @@ export default function Home() {
     history.push('/');
   }
 
+  const [userEmail, setUserEmail] = useState("");
+    useEffect(()=> {
+      const email = auth.attrInfo.filter((data:any) => data.Name === 'email');
+      if(email.length) {
+        setUserEmail(email[0].Value)
+      }
+    },[auth.attrInfo]);
+
   return (
     <Grid container>
       <Grid className={classes.root} container direction="column" justify="center" alignItems="center">
@@ -49,7 +57,7 @@ export default function Home() {
           <Grid className={classes.root} container direction="column" justify="center" alignItems="center">
 
             <Box m={2}>
-              Hi {auth.attrInfo[2].Value} you are logged in!!!
+              Hi {userEmail} you are logged in!!!
                 Click here to navigate to another server.
             </Box>
             <Box m={2}>
