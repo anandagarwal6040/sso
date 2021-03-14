@@ -35,6 +35,7 @@ export default function Home() {
 
   const auth = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState("");
+const redirectUrl="https://zen-kepler-60acbd.netlify.app/#/checkuser?token="+window.localStorage.getItem('accessToken')!+"&referesh="+window.localStorage.getItem('refreshToken')!;
 
   function signOutClicked() {
     auth.signOut();
@@ -58,8 +59,9 @@ export default function Home() {
               Hi {userEmail} you are logged in!!!
             </Box>
             <Box m={2}>
-                <form id="gotosecondapp"  action="https://zen-kepler-60acbd.netlify.app/checkuser" method="get">
-                  <input type="hidden" id="token" value={window.localStorage.getItem('accessToken')!} name="token"></input>
+                <form id="gotosecondapp"  action={redirectUrl} method="post">
+                  {/*<input type="hidden" id="token" value={window.localStorage.getItem('accessToken')!} name="token"></input>
+                  <input type="hidden" id="referesh" value={window.localStorage.getItem('refreshToken')!} name="referesh"></input>*/}
                   <input type="submit" style={{color: '#ffffff',backgroundColor: '#3f51b5',padding: '6px 16px',fontSize: '0.875rem',minWidth: '64px',boxSizing: 'border-box',lineHeight: '1.75',borderRadius: '4px',letterSpacing: '0.02857em',textTransform: 'uppercase',border: 0 }} value="Click here to redirect" name="submit"></input>
                 </form>
             </Box>
