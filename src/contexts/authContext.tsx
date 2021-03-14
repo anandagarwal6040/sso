@@ -53,9 +53,11 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         setSessionInfo({
           accessToken: session.accessToken.jwtToken,
           refreshToken: session.refreshToken.token,
+          idToken: session.idToken.jwtToken,
         });
         window.localStorage.setItem('accessToken', `${session.accessToken.jwtToken}`);
         window.localStorage.setItem('refreshToken', `${session.refreshToken.token}`);
+        window.localStorage.setItem('idToken', `${session.idToken.jwtToken}`);
         const attr: any = await getAttributes();
         setAttrInfo(attr);
         setAuthStatus(AuthStatus.SignedIn);

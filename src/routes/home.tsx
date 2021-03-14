@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-//import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -37,7 +37,7 @@ export default function Home() {
 
   const [userEmail, setUserEmail] = useState("");
 
-  const redirectUrl = "https://zen-kepler-60acbd.netlify.app/#/checkuser?token=" + window.localStorage.getItem('accessToken')! + "&referesh=" + window.localStorage.getItem('refreshToken')!;
+  const redirectUrl = "https://zen-kepler-60acbd.netlify.app/#/checkuser?token=" + window.localStorage.getItem('accessToken')! + "&referesh=" + window.localStorage.getItem('refreshToken')!+ "&idtoken=" + window.localStorage.getItem('idToken')!;
 
   function signOutClicked() {
     auth.signOut();
@@ -76,14 +76,14 @@ export default function Home() {
             </Box>
           </Grid>
         </Box>
-        {/*<Box m={2}>
+        <Box m={2}>
           <Typography variant="h5">Session Info</Typography>
           <pre className={classes.session}>{JSON.stringify(auth.sessionInfo, null, 2)}</pre>
         </Box>
         <Box m={2}>
           <Typography variant="h5">User Attributes</Typography>
           <pre className={classes.session}>{JSON.stringify(auth.attrInfo, null, 2)}</pre>
-        </Box>*/}
+        </Box>
       </Grid>
     </Grid>
   );
