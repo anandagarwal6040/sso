@@ -20,6 +20,7 @@ export interface IAuth {
   sendCode?: any
   getAttributes?: any
   setAttribute?: any
+  getSessionInfoByToken?: any
 };
 
 const defaultState: IAuth = {
@@ -70,6 +71,21 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
 
   if (authStatus === AuthStatus.Loading) {
     return null;
+  }
+
+  async function getSessionInfoByToken() {
+    try {
+      setSessionInfo({
+        accessToken: window.localStorage.getItem('accessToken'),
+        refreshToken: window.localStorage.getItem('refreshToken'),
+        idToken: window.localStorage.getItem('idToken'),
+      });
+      setAuthStatus(AuthStatus.SignedIn);
+      window.location.href = "/#/";
+    } catch (err) {
+      setAuthStatus(AuthStatus.SignedOut);
+      window.location.href = '/#/signin';
+    }
   }
 
   async function signInWithEmail(email: string, password: string) {
@@ -150,6 +166,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     sendCode,
     getAttributes,
     setAttribute,
+    getSessionInfoByToken,
   };
 
   return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
